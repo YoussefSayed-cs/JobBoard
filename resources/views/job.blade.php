@@ -1,12 +1,13 @@
-<div>
+<x-layout :title="$title ?? 'Job Listings'">
+
+<h1><strong>{{ $title }}</strong></h1>
+
+<h3>Welcome to the job listings page.</h3>
 
 
-    <h1>Job Listings</h1>
-    <p>Welcome to the job listings page.</p>
+    <h1>My name is <strong>{{ $name }}</strong></h1> <br>
 
-    <p>{{ count($jobs) }} jobs available</p>
-
-    <h1>My name is {{ $name }}</h1>
+    <hr> <br>
 
     @foreach ($jobs as $job)
 
@@ -18,6 +19,7 @@
         </div>
     
     @endforeach 
-    
-    
-</div>
+
+</x-layout>
+
+
