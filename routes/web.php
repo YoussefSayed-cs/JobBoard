@@ -5,6 +5,7 @@ use App\Http\Controllers\JobController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AboutController;   
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -27,3 +28,10 @@ PostController Routes
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 Route::get('/posts/create', [PostController::class, 'create']);
 Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show');
+
+
+/*
+CommentController Routes
+*/
+Route::get('/comments', [CommentController::class, 'index'])->name('comments.index');
+Route::get('/comments/create', [CommentController::class, 'create']);

@@ -11,4 +11,14 @@ class Post extends Model
     protected $fillable = ['title', 'body','author' ,'published']; //fields that can be updated by mass assignment
     
     protected $guarded = ['id']; //fields that cannot be updated by mass assignment(read only fields) 
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
 }
