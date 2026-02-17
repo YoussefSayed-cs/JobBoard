@@ -9,7 +9,7 @@ class PostController extends Controller
 {
     function index()
     {
-        $data = Post::paginate(5); //fetch all records from the posts table 
+        $data = Post::cursorPaginate(5); 
         $title = "All Posts";
         return view('posts.index', ['posts' => $data] + ['title' => $title]); //pass the data to the view with title
     }
