@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class TagRequest
@@ -11,7 +12,8 @@ class TagRequest
      */
     public function index()
     {
-        //
+        $data = Tag::paginate(5); //fetch all tags from the database    
+        return response()->json($data, 200); //return a JSON response with the data
     }
 
     /**

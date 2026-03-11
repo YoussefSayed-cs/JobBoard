@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Models\Comment;
 use Illuminate\Http\Request;
 
 class CommentRequest
@@ -11,7 +12,9 @@ class CommentRequest
      */
     public function index()
     {
-        //
+        $data = Comment::paginate(5); //fetch all comments from the database    
+        return response()->json($data, 200); //return a JSON response with the data
+        
     }
 
     /**
