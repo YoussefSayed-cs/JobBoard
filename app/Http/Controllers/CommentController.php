@@ -24,8 +24,8 @@ class CommentController extends Controller
         //     'author' => 'Youssef',
         // ]);
 
-        Comment::factory(100)->create(); //use the factory to create a new comment with random data
-        return redirect('/comments'); //redirect to the comments index page after creating a new comment
+        Comment::factory(10)->create(); //use the factory to create a new comment with random data
+        return response(content: ["message" => "Successful Creation"] , status: 201); //redirect to the posts index page after creating a new comment
     }
 
 

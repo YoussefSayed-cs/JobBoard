@@ -1,9 +1,6 @@
 <?php
 
 use App\Http\Controllers\IndexController;
-use App\Http\Controllers\JobController;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\AboutController;   
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\TagController;
@@ -19,18 +16,14 @@ Route::get('/jobs' , [IndexController::class , 'job'])->name('job');
 Route::get('/about' , [IndexController::class , 'about'])->name('about');
 Route::get('/contact' , [IndexController::class , 'contact'])->name('contact');
 
-// Route::get('/contact' , [ContactController::class , 'index'])->name('contact');
-// Route::get('/jobs', [JobController::class, 'index'])->name('jobs');
-// Route::get('/about', [AboutController::class, 'index'])->name('about'); 
+ 
 
 /*
-PostController Routes
+PostController 
 */
-Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
-//Route::post('/posts', [PostController::class, 'create']);
-//Route::put('/posts/{id}', [PostController::class, 'update']);
-//Route::delete('/posts/{id}', [PostController::class, 'destroy']);
-Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show');
+
+Route::resource('/posts', PostController::class); //use resourceful routing for the posts controller to handle all CRUD operations in one line
+
 
 
 /*
