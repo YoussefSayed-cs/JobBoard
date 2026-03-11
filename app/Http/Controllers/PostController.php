@@ -16,8 +16,7 @@ class PostController extends Controller
     {
         $data = Post::cursorPaginate(5); 
         $title = "All Posts";
-        return view('posts.index', ['posts' => $data] + ['title' => $title]); //pass the data to the view with title
-        
+        return view('posts.index', ['posts' => $data] + ['title' => $title]); //pass the data to the view with title  
     }
 
     /**
@@ -25,16 +24,7 @@ class PostController extends Controller
      */
     public function create()
     { 
-
-        // $posts = Post::create([
-        //     'title' => 'New Post1111',
-        //     'body' => 'This is the content of the new post11111.',
-        //     'published' => true,
-        //     'author' => 'Youssef',
-        // ]);
-
         Post::factory(10)->create(); //use the factory to create a new post with random data
-
         return response(content: ["message" => "Successful Creation"], status: 201); //redirect to the posts index page after creating a new post
     }
 
@@ -60,7 +50,7 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        //@TODO: fetch the post by id and pass it to the edit view to show the edit form
     }
 
     /**

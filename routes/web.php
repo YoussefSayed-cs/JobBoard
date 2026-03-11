@@ -24,19 +24,14 @@ PostController
 
 Route::resource('/posts', PostController::class); //use resourceful routing for the posts controller to handle all CRUD operations in one line
 
-
-
 /*
 CommentController Routes
 */
-Route::get('/comments', [CommentController::class, 'index'])->name('comments.index');
-//Route::post('/comments', [CommentController::class, 'create']);
 
-
+Route::resource('/comments', CommentController::class); //use resourceful routing for the comments controller to handle all CRUD operations in one line
 
 /*
 TagController Routes
 */
-Route::get('/tags', [TagController::class, 'index'])->name('tags.index');
-//Route::post('/tags', [TagController::class, 'create']);
-Route::get('/tags/test', [TagController::class, 'testManyToMany']);
+
+Route::resource('/tags', TagController::class); //use resourceful routing for the tags controller to handle all CRUD operations in one line
