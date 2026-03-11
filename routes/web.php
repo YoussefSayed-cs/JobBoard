@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\IndexController;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\CommentController;
-use App\Http\Controllers\TagController;
+use App\Http\Controllers\web\IndexController;
+use App\Http\Controllers\web\PostController;
+use App\Http\Controllers\web\CommentController;
+use App\Http\Controllers\web\TagController;
 use Illuminate\Support\Facades\Route;
 
 
