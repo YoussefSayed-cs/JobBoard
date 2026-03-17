@@ -35,6 +35,8 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //@TODO: validate the request data before creating a new post
+
+        print_r($request->all()); //print the request data to the console for debugging purposes
     }
 
     /**
