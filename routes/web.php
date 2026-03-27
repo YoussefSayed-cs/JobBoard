@@ -21,20 +21,16 @@ Route::get('/contact' , [ContactController::class , '__invoke'])->name('contact'
 
  
 
-/*
-PostController 
-*/
 
-Route::resource('/posts', PostController::class); //use resourceful routing for the posts controller to handle all CRUD operations in one line
+//PostController Routes
+Route::resource('/posts', PostController::class);   /*use resourceful routing for the posts controller 
+                                                    to handle all CRUD operations in one line */
 
-/*
-CommentController Routes
-*/
+//CommentController Routes
+Route::resource('/comments', CommentController::class)->except('destroy');  /*use resourceful routing for the comments controller
+                                                                             to handle all CRUD operations in one line*/
 
-Route::resource('/comments', CommentController::class)->except('destroy'); //use resourceful routing for the comments controller to handle all CRUD operations in one line
 
-/*
-TagController Routes
-*/
-
-Route::resource('/tags', TagController::class)->only('index', 'show'); //use resourceful routing for the tags controller to handle all CRUD operations in one line
+//TagController Routes
+Route::resource('/tags', TagController::class)->only('index', 'show'); /*use resourceful routing for the tags controller
+                                                                         to handle all CRUD operations in one line*/

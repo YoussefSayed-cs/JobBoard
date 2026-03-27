@@ -7,24 +7,33 @@
         </a>
     </div>
 
+    <br>
+
     @foreach($posts as $post)
-        <div class="post border border-gray-300 p-4 mb-5 rounded-lg shadow-sm">
+    <div class="post border border-gray-300 p-4 mb-5 rounded-lg shadow-sm">
+
+        <div>
             <h2 class="text-xl font-semibold text-gray-800">{{ $post->title }}</h2>
-            <p class="text-gray-600 mt-2">{{ $post->body }}</p>
-            
-            <hr class="my-4">
-            <h3 class="text-blue-600 font-medium mb-2">Comments for this post:</h3>
-            
-            {{-- عرض التعليقات --}}
-            @forelse($post->comments as $comment)
-                <div class="comment ml-8 bg-gray-50 p-3 mb-2 rounded border-l-4 border-blue-400">
-                    <h4 class="font-bold text-sm text-gray-700">{{ $comment->title }}</h4>
-                    <p class="text-sm text-gray-600">{{ $comment->body }}</p>
-                </div>
-            @empty
-                <p class="text-gray-400 italic ml-8 text-sm">No comments yet.</p>
-            @endforelse
+            <p class="text-gray-600">{{ $post->author }}</p>
         </div>
+
+        <div>
+            <a href="/posts/{{ $post->id }}/edit" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+            <button class="text-red-600 hover:text-red-900">Delete</button>
+        </div>
+
+        <hr class="my-4">
+        <h3 class="text-blue-600 font-medium mb-2">Comments for this post:</h3>
+        
+        @forelse($post->comments as $comment)
+        <div class="comment ml-8 bg-gray-50 p-3 mb-2 rounded border-l-4 border-blue-400">
+            <h4 class="font-bold text-sm text-gray-700">{{ $comment->title }}</h4>
+            <p class="text-sm text-gray-600">{{ $comment->body }}</p>
+        </div>
+        @empty
+        <p class="text-gray-400 italic ml-8 text-sm">No comments yet.</p>
+        @endforelse
+    </div>
     @endforeach
 
     <div class="mt-4">

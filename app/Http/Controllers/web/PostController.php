@@ -16,7 +16,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $data = Post::cursorPaginate(5); 
+        $data = Post::paginate(10); //fetch all posts with pagination, 10 posts per page
         $title = "All Posts";
         return view('posts.index', ['posts' => $data] + ['title' => $title]); //pass the data to the view with title  
     }
@@ -35,15 +35,10 @@ class PostController extends Controller
      */
     public function store(PostRequest $request)
     {
-      $post  = new Post(); //create a new instance of the Post model
-      $post->title = $request->input('title'); //set the title of the post from the request input
-      $post->body = $request->input('body'); //set the body of the post from the request input
-      $post->published = $request->has('published'); //set the published status of the post from the request input
-      $post->author = $request->input('author'); //set the author of the post from the request
-
+      $post = new Post($request->validated());
       $post->save(); //save the post to the database
 
-      return redirect('/posts'); //redirect to the posts index page after saving the post   
+      return redirect('/posts')->with('success', 'Post created successfully.'); //redirect to the posts index page after saving the post   
     }
 
     /** 
@@ -60,7 +55,9 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        //@TODO: fetch the post by id and pass it to the edit view to show the edit form
+        
+        $post = Post::findOrFail($id); //fetch the post by id or fail if not found
+        return view('posts.edit', ['posts' => $post]); //pass the post to
     }
 
     /**
