@@ -16,7 +16,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $data = Post::paginate(10); //fetch all posts with pagination, 10 posts per page
+        $data = Post::latest()->paginate(10); //fetch all posts with pagination, 10 posts per page
         $title = "All Posts";
         return view('posts.index', ['posts' => $data] + ['title' => $title]); //pass the data to the view with title  
     }
@@ -26,7 +26,6 @@ class PostController extends Controller
      */
     public function create()
     { 
-        Post::factory(10)->create(); //use the factory to create a new post with random data
         return View('posts.create'); //return the view for creating a new post
     }
 

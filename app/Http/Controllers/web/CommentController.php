@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\web;
 
 use App\Models\Comment;
+use App\Http\Requests\CommentRequest;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -22,16 +23,17 @@ class CommentController extends Controller
      */
     public function create()
     {
-        Comment::factory(10)->create(); //use the factory to create a new comment with random data
-        return response(content: ["message" => "Successful Creation"] , status: 201); //redirect to the posts index page after creating a new comment
+        return view('comments.create', ['message' => 'Successful Creation']); //redirect to the posts index page after creating a new comment
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CommentRequest $request)
     {
-        //
+        $comment = Comment::create($request->validated());
+        $comment->save(); //save the comment to the database
+        return redirect('/comments')->with('success', 'Comment created successfully.');
     }
 
     /**
@@ -39,7 +41,8 @@ class CommentController extends Controller
      */
     public function show(string $id)
     {
-        //@TODO: fetch the comment by id and pass it to the show view to display the comment details
+        $comment = Comment::findOrFail($id); //fetch a single record by id or fail if not found
+        return view('comments.show', ['comments' => $comment]); //pass the comment to the view
     }
 
     /**
@@ -64,6 +67,6 @@ class CommentController extends Controller
     public function destroy(string $id)
     {   
         Comment::destroy($id); //delete the comment by id
-        return response(content: ["message" => "Successful Deletion"] , status: 200 ); //redirect to the comments index page after deleting the comment
+        return redirect('/comments')->with('success', 'Comment deleted successfully.'); //redirect to the comments index page after deleting the comment
     }
 }
