@@ -13,7 +13,9 @@
     <div class="post border border-gray-300 p-4 mb-5 rounded-lg shadow-sm">
 
         <div>
-            <h2 class="text-xl font-semibold text-gray-800">{{ $post->title }}</h2>
+            <h2 class="text-xl font-semibold text-gray-800">
+            <a href="/posts/{{ $post->id }}">{{ $post->title }}</a></h2>
+            
             <p class="text-gray-600">{{ $post->author }}</p>
         </div>
 

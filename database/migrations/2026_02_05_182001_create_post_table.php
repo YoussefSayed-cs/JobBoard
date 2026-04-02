@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string("title");
             $table->string("body");
             $table->string("author");   
-            $table->boolean("published");
+            $table->boolean("published")->nullable();
             $table->timestamps();
         });
     }
