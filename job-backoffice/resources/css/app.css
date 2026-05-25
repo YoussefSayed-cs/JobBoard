@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+@layer components {
+    .dashboard-card {
+        @apply bg-white rounded-xl shadow-sm border border-gray-100 p-6 transition-all duration-300 hover:shadow-md hover:-translate-y-1;
+    }
+
+    .btn-primary {
+        @apply px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-black transition-all duration-300 shadow-lg hover:shadow-gray-500/30;
+    }
+}

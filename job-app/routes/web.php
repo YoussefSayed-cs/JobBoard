@@ -1,0 +1,29 @@
+<?php
+
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\JobApplicationsController;
+use App\Http\Controllers\JobVacancyController;
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+
+Route::get('/', function () {
+    $companies = \App\Models\company::latest()->take(6)->get();
+    return view('welcome', compact('companies'));
+});
+
+
+Route::middleware(['auth' , 'role:job-seeker'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
+
+    Route::get('/job-applications', [JobApplicationsController::class,'index'])->name('job-applications.index');
+    Route::get('/job-vacancies/{id}', [JobVacancyController::class,'show'])->name('job-vacancy.show');
+    Route::get('/job-vacancies/{id}/apply', [JobVacancyController::class,'apply'])->name('job-vacancy.apply');
+    Route::post('/job-vacancies/{id}/apply', [JobVacancyController::class,'processApplications'])->name('job-vacancy.processApplications');
+
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
