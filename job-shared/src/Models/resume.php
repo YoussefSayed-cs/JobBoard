@@ -28,17 +28,14 @@ class resume extends Model
 
     protected $dates = ['deleted_at'];
 
-    /**
-     * تحديث الـ Casts عشان تتعامل مع مخرجات Gemini (Arrays)
-     */
     protected function casts(): array
     {
         return [
             'deleted_at' => 'datetime',
-            'contactDetails' => 'array', // عشان Gemini بيرجع JSON
-            'education' => 'array',      // عشان الـ Foreach في الـ Blade
-            'skills' => 'array',         // عشان تتعامل معاها كـ Tags
-            'experience' => 'array',     // عشان هيكل الخبرات المعقد
+            'contactDetails' => 'array', 
+            'education' => 'array',      
+            'skills' => 'array',         
+            'experience' => 'array',    
         ];
     }
 
@@ -47,10 +44,7 @@ class resume extends Model
         return $this->belongsTo(User::class, 'userID', 'id');
     }
     
-    /**
-     * تعديل بسيط: العلاقة مع طلبات التوظيف 
-     * المفروض الـ Foreign Key يكون resumeID مش userID
-     */
+    
     public function job_applications() 
     {
         return $this->hasMany(job_application::class, 'resumeID', 'id');

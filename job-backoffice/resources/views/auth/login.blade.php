@@ -110,7 +110,7 @@
                             autofocus
                             value="{{ old('email') }}"
                             placeholder="Email"
-                            class="w-full h-12 rounded-xl border border-slate-200 bg-white px-4 pr-11 text-sm text-slate-900 placeholder-slate-300 font-light outline-none transition focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 @error('email') border-red-400 focus:border-red-400 focus:ring-red-400/10 @enderror"
+                            class="w-full h-12 rounded-xl @error('email') border border-red-400 @else border border-slate-200 @enderror bg-white px-4 pr-11 text-sm text-slate-900 placeholder-slate-300 font-light outline-none transition @error('email') focus:border-red-400 focus:ring-4 focus:ring-red-400/10 @else focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 @enderror"
                         />
                         <span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-300 pointer-events-none">
                             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -125,7 +125,7 @@
                 </div>
 
                 {{-- Password --}}
-                <div x-data="{ show: false }">
+                <div>
                     <label for="password" class="block text-[10.5px] font-medium text-slate-500 mb-2 tracking-[0.18em] uppercase">
                         Password
                     </label>
@@ -133,22 +133,23 @@
                         <input
                             id="password"
                             name="password"
-                            :type="show ? 'text' : 'password'"
+                            type="password"
                             autocomplete="current-password"
                             required
                             placeholder="••••••••••"
                             class="w-full h-12 rounded-xl border border-slate-200 bg-white px-4 pr-11 text-sm text-slate-900 placeholder-slate-300 font-light outline-none transition focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 @error('password') border-red-400 focus:border-red-400 focus:ring-red-400/10 @enderror"
                         />
                         <button
+                            id="password-toggle"
                             type="button"
-                            @click="show = !show"
-                            class="absolute right-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300 hover:text-indigo-500 transition-colors z-10 flex items-center justify-center"
+                            aria-label="Toggle password visibility"
+                            class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-300 hover:text-indigo-500 transition-colors z-10"
                         >
-                            <svg x-show="!show" class="w-4 h-4 absolute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <svg id="password-toggle-show" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                                 <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
                                 <circle cx="12" cy="12" r="3"/>
                             </svg>
-                            <svg x-show="show" x-cloak class="w-4 h-4 absolute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <svg id="password-toggle-hide" class="w-4 h-4 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                                 <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
                                 <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
                                 <line x1="1" y1="1" x2="23" y2="23"/>
@@ -210,5 +211,31 @@
         </div>
     </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const password = document.querySelector('#password');
+            const toggle = document.querySelector('#password-toggle');
+            const iconShow = document.querySelector('#password-toggle-show');
+            const iconHide = document.querySelector('#password-toggle-hide');
+
+            if (!password || !toggle || !iconShow || !iconHide) {
+                return;
+            }
+
+            toggle.addEventListener('click', function () {
+                const passwordIsVisible = password.type === 'text';
+
+                if (passwordIsVisible) {
+                    password.type = 'password';
+                    iconShow.classList.remove('hidden');
+                    iconHide.classList.add('hidden');
+                } else {
+                    password.type = 'text';
+                    iconShow.classList.add('hidden');
+                    iconHide.classList.remove('hidden');
+                }
+            });
+        });
+    </script>
 </body>
 </html>

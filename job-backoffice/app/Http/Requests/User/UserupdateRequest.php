@@ -22,7 +22,7 @@ class UserupdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            
+             
            'password' => 'required|string|min:8|bail',
         ];
     }
@@ -30,11 +30,10 @@ class UserupdateRequest extends FormRequest
     public function messages(): array
     {
         return [
-            
+
             'password.required' => 'The password is required.',
             'password.min' => 'The password must be at least 8 characters.',
-            
+
         ];
     }
 }
- 

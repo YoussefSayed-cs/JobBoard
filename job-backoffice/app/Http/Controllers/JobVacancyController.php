@@ -17,7 +17,7 @@ class JobVacancyController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(Request $request) 
     {
         //Active
         $query = job_vacancy::latest();

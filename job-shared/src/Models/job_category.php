@@ -20,7 +20,7 @@ class job_category extends Model
     protected $fillable = 
     [
         'name', 
-    ];
+    ]; 
 
     protected $dates = ['deleted_at'];
 

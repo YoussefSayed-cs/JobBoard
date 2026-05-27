@@ -84,7 +84,7 @@ class JobVacancyController extends Controller
             $fileName = 'resume_' . time() . '.pdf';
             $path = $file->storeAs('resume', $fileName, 'cloud');
 
-            // ✅ استخراج البيانات باستخدام Gemini
+            
             try {
                 $extracted = $this->resumeService->extractResumeInformation($path);
             } catch (\Throwable $e) {

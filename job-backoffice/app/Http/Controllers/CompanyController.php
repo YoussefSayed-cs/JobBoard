@@ -57,7 +57,11 @@ class CompanyController extends Controller
     {
 
         $company = $this->myCompany($id);
-        return view('Company.show', compact('company'));
+
+        $jobs = $company->jobVacancies()->paginate(10, ['*'], 'jobs_page')->onEachSide(1)->appends(['tab' => 'jobs']);
+        $applications = $company->applications()->paginate(10, ['*'], 'applications_page')->onEachSide(1)->appends(['tab' => 'applications']);
+
+        return view('Company.show', compact('company', 'jobs', 'applications'));
     }
 
     /**
@@ -114,10 +118,9 @@ class CompanyController extends Controller
     {
         if ($id) {
             return Company::findOrFail($id);
-        } else {
-            return Company::where('ownerID', Auth::user()->id)->first();
         }
 
-
+        return Company::where('ownerID', Auth::id())
+            ->firstOrFail();
     }
 }

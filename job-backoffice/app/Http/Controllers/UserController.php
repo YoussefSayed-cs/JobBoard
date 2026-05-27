@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Hash;
 use Illuminate\Http\Request;
 use App\Http\Requests\User\UserupdateRequest;
 use Illuminate\Support\Facades\Hash as FacadesHash;
@@ -15,28 +14,28 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-      $query =User::latest();
+        $query = User::select(['id', 'name', 'email', 'role'])->latest();
 
-    $search = $request->search;
-     if ($search) {
-    $query->where(function ($q) use ($search) {
-        $q->where('name', 'like', "%$search%")
-          ->orWhere('email', 'like', "%$search%");
-    });
+        $search = $request->search;
+        if ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%$search%")
+                    ->orWhere('email', 'like', "%$search%");
+            });
+        }
 
-}
-
-        if( $request->input('archived') == 'true' )
-        {
+        if ($request->input('archived') == 'true') {
             $query->onlyTrashed();
         }
-        $users = $query->paginate(10)->onEachSide(2);
-        return view("Livewire.index" ,compact("users"));
+
+        $users = $query->paginate(10)->onEachSide(3)->withQueryString();
+
+        return view("User.index", compact("users"));
     }
 
-        /**
-        * Show the form for creating a new resource.
-        */
+    /**
+     * Show the form for creating a new resource.
+     */
     public function edit(string $id)
     {
         $users = User::findOrFail($id);
@@ -51,13 +50,11 @@ class UserController extends Controller
         $users = User::findOrFail($id);
         $users->update([
 
-        'password' => FacadesHash::make($request->input('password')),
+            'password' => FacadesHash::make($request->input('password')),
         ]);
 
 
         return redirect()->route('users.index')->with('success', 'User updated successfully.');
-
-
     }
 
     /**

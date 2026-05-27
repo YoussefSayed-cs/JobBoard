@@ -86,13 +86,13 @@
                 <li>
                     <a href="{{ route('companies.show', ['company' => $company->id, 'tab' => 'jobs']) }}"
                        class="inline-block py-3 px-4 font-semibold border-b-2 transition {{ (request('tab') == 'jobs' || request('tab') == '') ? 'text-blue-600 border-blue-600' : 'text-gray-600 border-transparent hover:text-gray-900' }}">
-                        💼 Jobs ({{ ($company->jobVacancies ?? collect())->count() }})
+                        💼 Jobs ({{ $jobs->total() }})
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('companies.show', ['company' => $company->id, 'tab' => 'applications']) }}"
                        class="inline-block py-3 px-4 font-semibold border-b-2 transition {{ request('tab') == 'applications' ? 'text-blue-600 border-blue-600' : 'text-gray-600 border-transparent hover:text-gray-900' }}">
-                        📋 Applications ({{ ($company->applications ?? collect())->count() }})
+                        📋 Applications ({{ $applications->total() }})
                     </a>
                 </li>
             </ul>
@@ -115,7 +115,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($company->jobVacancies ?? [] as $job)
+                                @forelse ($jobs as $job)
                                     <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
                                         <td class="px-6 py-4 text-sm font-semibold text-gray-900">
                                             <a href="{{ route('job-vacancies.show', $job->id) }}" class="text-blue-600 hover:text-blue-800 hover:underline">
@@ -146,6 +146,11 @@
                             </tbody>
                         </table>
                     </div>
+                    @if($jobs->hasPages())
+                        <div class="px-6 py-4 border-t border-gray-200">
+                            {{ $jobs->links() }}
+                        </div>
+                    @endif
                 </div>
             </div>
 
@@ -163,10 +168,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($company->applications ?? [] as $app)
+                                @forelse ($applications as $app)
                                     <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
-                                        <td class="px-6 py-4 text-sm font-semibold text-gray-900">{{ $app->user->name ?? '—' }}</td>
-                                        <td class="px-6 py-4 text-sm text-gray-700">{{ $app->job->title ?? '—' }}</td>
+                                        <td class="px-6 py-4 text-sm font-semibold text-gray-900">{{ $app->Owner->name ?? '—' }}</td>
+                                        <td class="px-6 py-4 text-sm text-gray-700">{{ $app->JobVacancy->title ?? '—' }}</td>
                                         <td class="px-6 py-4 text-sm">
                                             @if($app->status == 'pending')
                                                 <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-semibold">⏳ Pending</span>
@@ -194,6 +199,11 @@
                             </tbody>
                         </table>
                     </div>
+                    @if($applications->hasPages())
+                        <div class="px-6 py-4 border-t border-gray-200">
+                            {{ $applications->links() }}
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

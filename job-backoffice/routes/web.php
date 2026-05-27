@@ -16,12 +16,8 @@ Route::middleware(['auth', 'role:admin,company-owner'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::delete('/notifications/{id}', function ($id) {
-        Auth::user()
-            ->notifications()
-            ->where('id', $id)
-            ->delete();
-
-        return back();
+     Auth::user()->notifications()->where('id', $id)->delete();
+     return back();
     })->name('notifications.delete');
 
     // Mark notification as read
@@ -46,10 +42,10 @@ Route::middleware(['auth', 'role:admin,company-owner'])->group(function () {
 
     Route::post('/api/job-applications/notify', function (Request $request) {
 
-        $application = job_application::findOrFail($request->input('applicationID'));
-        $job = $application->jobVacancy;
+        // $application = job_application::findOrFail($request->input('applicationID'));
+        // $job = $application->jobVacancy;
 
-        $job->company->owner;
+        // $job->company->owner;
 
         return response()->json(['status' => 'ok']);
     });
