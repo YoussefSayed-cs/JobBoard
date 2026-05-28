@@ -9,7 +9,7 @@
         <x-toast-notification />
 
         <!-- Company Card -->
-        <div class="bg-white shadow-lg rounded-lg p-8 mb-6 border-l-4 border-blue-500">
+        <div class="bg-white shadow-lg rounded-lg p-8 mb-6 border-l-4 ">
             <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-6">
                 <div class="flex-1">
                     <h3 class="text-3xl font-bold mb-4 text-gray-900">{{ $vacancy->company->name }}</h3>

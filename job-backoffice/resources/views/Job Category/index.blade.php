@@ -21,7 +21,7 @@
                     <!-- Archived Categories -->
                     <a href="{{ route('job-categories.index', ['archived' => 'true']) }}"
                         class="inline-flex items-center px-5 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition font-semibold">
-                        📦 Archived Categories
+                         Archived Categories
                     </a>
                 @endif
             </div>
@@ -29,14 +29,14 @@
             <!-- Add Job Category Button -->
             <a href="{{ route('job-categories.create') }}"
                 class="inline-flex items-center px-5 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition font-semibold">
-                ➕ Add Job Category
+                Add Job Category
             </a>
         </div>
 
         <!-- Table -->
         <div class="bg-white shadow-lg rounded-lg overflow-hidden">
             <div class="overflow-x-auto">
-                <table class="w-full"> 
+                <table class="w-full">
                     <thead class="bg-gray-50 border-b border-gray-200">
                         <tr>
                             <th class="px-6 py-4 text-left text-sm font-bold text-gray-700">Category Name</th>
@@ -66,7 +66,7 @@
                                             <!-- Edit Button -->
                                             <a href="{{ route('job-categories.edit', $category->id)}}"
                                                 class="text-blue-600 hover:text-blue-800 font-semibold hover:underline">
-                                                ✏️ Edit
+                                               Edit
                                             </a>
 
                                             <!-- Archive Button -->
@@ -74,7 +74,7 @@
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="text-orange-600 hover:text-orange-800 font-semibold hover:underline">
-                                                    🗂️ Archive
+                                                     Archive
                                                 </button>
                                             </form>
                                         @endif

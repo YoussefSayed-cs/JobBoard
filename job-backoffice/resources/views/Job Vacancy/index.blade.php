@@ -21,7 +21,7 @@
                     <!-- Archived -->
                     <a href="{{ route('job-vacancies.index', ['archived' => 'true']) }}"
                         class="inline-flex items-center px-5 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition font-semibold">
-                        📦 Archived Job Vacancies
+                         Archived Job Vacancies
                     </a>
                 @endif
             </div>
@@ -29,7 +29,7 @@
             <!-- Add Job Vacancy Button -->
             <a href="{{ route('job-vacancies.create') }}"
                 class="inline-flex items-center px-5 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition font-semibold">
-                ➕ Add Job Vacancy
+                 Add Job Vacancy
             </a>
         </div>
 
@@ -85,14 +85,14 @@
                                                 @csrf
                                                 @method('PUT')
                                                 <button type="submit" class="text-green-600 hover:text-green-800 font-semibold hover:underline">
-                                                    ✓ Restore
+                                                     Restore
                                                 </button>
                                             </form>
                                         @else
                                             <!-- Edit Button -->
                                             <a href="{{ route('job-vacancies.edit', $vacancy->id)}}"
                                                 class="text-blue-600 hover:text-blue-800 font-semibold hover:underline">
-                                                ✏️ Edit
+                                                 Edit
                                             </a>
 
                                             <!-- Archive Button -->
@@ -100,7 +100,7 @@
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="text-orange-600 hover:text-orange-800 font-semibold hover:underline">
-                                                    🗂️ Archive
+                                                  Archive
                                                 </button>
                                             </form>
                                         @endif

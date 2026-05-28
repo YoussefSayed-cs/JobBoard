@@ -25,9 +25,9 @@
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
 
             {{-- Users --}}
-            <div class="relative bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden
+            <div     class="relative bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden
                         hover:-translate-y-1 hover:shadow-lg transition-all duration-200 group">
-                <div class="absolute top-0 left-0 right-0 h-1 "></div>
+                <div class="absolute top-0 left-0 right-0 h-1 bg-blue-500"></div>
                 <div class="p-6 pt-7">
                     <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center
                                 group-hover:bg-blue-600 group-hover:text-white transition-all duration-200">
@@ -49,7 +49,7 @@
             {{-- Jobs --}}
             <div class="relative bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden
                         hover:-translate-y-1 hover:shadow-lg transition-all duration-200 group">
-                <div class="absolute top-0 left-0 right-0 h-1 "></div>
+                <div class="absolute top-0 left-0 right-0 h-1 bg-violet-500"></div>
                 <div class="p-6 pt-7">
                     <div class="w-10 h-10 rounded-xl bg-violet-50 text-violet-600 flex items-center justify-center
                                 group-hover:bg-violet-600 group-hover:text-white transition-all duration-200">
@@ -71,7 +71,7 @@
             {{-- Applications --}}
             <div class="relative bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden
                         hover:-translate-y-1 hover:shadow-lg transition-all duration-200 group">
-                <div class="absolute top-0 left-0 right-0 h-1 "></div>
+                <div class="absolute top-0 left-0 right-0 h-1 bg-amber-400"></div>
                 <div class="p-6 pt-7">
                     <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-500 flex items-center justify-center
                                 group-hover:bg-amber-500 group-hover:text-white transition-all duration-200">
@@ -94,7 +94,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
             {{-- Overview Bar Chart --}}
-            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 hover:-translate-y-1 hover:shadow-lg transition-all duration-200 group">
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 hover:-translate-y-1 hover:shadow-lg transition-all duration-200">
                 <div class="flex items-start justify-between mb-4">
                     <div>
                         <h3 class="text-base font-bold text-slate-800">System Overview</h3>
@@ -113,18 +113,12 @@
                     </div>
                 </div>
                 <div class="relative w-full" style="height: 260px;">
-                    <canvas id="overviewChart"
-                        aria-label="Bar chart showing total users, jobs, and applications"
-                        role="img">
-                        Users: {{ $analytics['activeUsers'] }},
-                        Jobs: {{ $analytics['totalJob'] }},
-                        Applications: {{ $analytics['totalapplications'] }}
-                    </canvas>
+                    <canvas id="overviewChart" role="img" aria-label="Bar chart showing total users, jobs, and applications"></canvas>
                 </div>
             </div>
 
             {{-- Conversion Doughnut Chart --}}
-            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 hover:-translate-y-1 hover:shadow-lg transition-all duration-200 group">
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 hover:-translate-y-1 hover:shadow-lg transition-all duration-200">
                 <div class="flex items-start justify-between mb-4">
                     <div>
                         <h3 class="text-base font-bold text-slate-800">Conversion Rates</h3>
@@ -133,17 +127,13 @@
                 </div>
                 <div id="donut-legend" class="flex flex-wrap gap-x-4 gap-y-1.5 mb-4 text-xs text-slate-500"></div>
                 <div class="relative w-full" style="height: 220px;">
-                    <canvas id="conversionChart"
-                        aria-label="Doughnut chart showing conversion rates per job"
-                        role="img">
-                        Conversion rate data
-                    </canvas>
+                    <canvas id="conversionChart" role="img" aria-label="Doughnut chart showing conversion rates per job"></canvas>
                 </div>
             </div>
         </div>
 
         {{-- ===== MOST APPLIED JOBS TABLE ===== --}}
-        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden hover:-translate-y-1 hover:shadow-lg transition-all duration-200 group">
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden hover:-translate-y-1 hover:shadow-lg transition-all duration-200">
             <div class="px-6 py-4 border-b border-slate-100 bg-slate-50/60 flex items-center justify-between">
                 <div>
                     <h3 class="text-base font-bold text-slate-800">Most Popular Jobs</h3>
@@ -161,18 +151,10 @@
                     </colgroup>
                     <thead class="bg-slate-50 border-b border-slate-100">
                         <tr>
-                            <th class="px-5 py-3 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">
-                                Rank & Job Title
-                            </th>
-                            <th class="px-5 py-3 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">
-                                Company
-                            </th>
-                            <th class="px-5 py-3 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">
-                                Type
-                            </th>
-                            <th class="px-5 py-3 text-right text-xs font-bold text-slate-400 uppercase tracking-wider">
-                                Applicants
-                            </th>
+                            <th class="px-5 py-3 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">Rank & Job Title</th>
+                            <th class="px-5 py-3 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">Company</th>
+                            <th class="px-5 py-3 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">Type</th>
+                            <th class="px-5 py-3 text-right text-xs font-bold text-slate-400 uppercase tracking-wider">Applicants</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-100">
@@ -236,13 +218,23 @@
     {{-- ===== SCRIPTS ===== --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        // ---- Shared config ----
+        // ---- بيانات من Laravel بالطريقة الصح ----
+        const analyticsData = {
+            activeUsers:      @json($analytics['activeUsers']),
+            totalJob:         @json($analytics['totalJob']),
+            totalapplications: @json($analytics['totalapplications']),
+        };
+
+        const convLabels = @json($analytics['conversionRates']->pluck('title'));
+        const convData   = @json($analytics['conversionRates']->pluck('conversionRates'));
+
+        // ---- Shared tooltip config ----
         const tooltipDefaults = {
             backgroundColor: 'rgba(15,23,42,0.92)',
             padding: 10,
             cornerRadius: 8,
             titleFont: { size: 12, weight: '600' },
-            bodyFont: { size: 13 }
+            bodyFont:  { size: 13 }
         };
 
         // ---- Overview Bar Chart ----
@@ -253,14 +245,14 @@
                 datasets: [{
                     label: 'Total Count',
                     data: [
-                        {{ $analytics['activeUsers'] }},
-                        {{ $analytics['totalJob'] }},
-                        {{ $analytics['totalapplications'] }}
+                        analyticsData.activeUsers,
+                        analyticsData.totalJob,
+                        analyticsData.totalapplications
                     ],
                     backgroundColor: ['#378ADD', '#7F77DD', '#EF9F27'],
-                    borderWidth: 0,
-                    borderRadius: 7,
-                    barThickness: 44,
+                    borderWidth:   0,
+                    borderRadius:  7,
+                    barThickness:  44,
                 }]
             },
             options: {
@@ -296,12 +288,10 @@
         });
 
         // ---- Conversion Doughnut Chart ----
-        const convLabels = {!! json_encode($analytics['conversionRates']->pluck('title')) !!};
-        const convData   = {!! json_encode($analytics['conversionRates']->pluck('conversionRates')) !!};
         const convColors = ['#378ADD', '#7F77DD', '#1D9E75', '#EF9F27', '#D4537E'];
 
-        const allZero = convData.length === 0 || convData.every(v => parseFloat(v) === 0);
-        const finalLabels = allZero && convLabels.length === 0 ? ['No Data'] : convLabels;
+        const allZero    = convData.length === 0 || convData.every(v => parseFloat(v) === 0);
+        const finalLabels = (allZero && convLabels.length === 0) ? ['No Data'] : convLabels;
         const finalData   = allZero ? finalLabels.map(() => 1) : convData;
         const finalColors = (allZero && finalLabels[0] === 'No Data') ? ['#e2e8f0'] : convColors;
 
@@ -310,10 +300,11 @@
         finalLabels.forEach((label, i) => {
             if (label === 'No Data') return;
             const val = allZero ? '0%' : (parseFloat(finalData[i]).toFixed(1) + '%');
+            const color = finalColors[i] ?? convColors[i % convColors.length];
             legendEl.innerHTML += `
                 <span class="flex items-center gap-1.5">
                     <span class="w-2.5 h-2.5 rounded-sm inline-block flex-shrink-0"
-                          style="background:${finalColors[i] ?? convColors[i % convColors.length]}"></span>
+                          style="background:${color}"></span>
                     ${label} ${val}
                 </span>`;
         });
@@ -323,11 +314,11 @@
             data: {
                 labels: finalLabels,
                 datasets: [{
-                    data: finalData,
+                    data:            finalData,
                     backgroundColor: finalColors,
-                    borderColor: '#ffffff',
-                    borderWidth: 3,
-                    hoverOffset: 6
+                    borderColor:     '#ffffff',
+                    borderWidth:     3,
+                    hoverOffset:     6
                 }]
             },
             options: {

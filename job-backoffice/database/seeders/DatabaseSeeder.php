@@ -8,7 +8,6 @@ use App\Models\job_category;
 use App\Models\job_vacancy;
 use App\Models\resume;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use function Symfony\Component\Clock\now;
@@ -112,5 +111,5 @@ class DatabaseSeeder extends Seeder
         }
     }
 
-       
+
 }

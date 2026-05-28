@@ -1,6 +1,6 @@
 @php
-if (Auth::user()->Role == 'admin') {
-$formaction = Auth::user()->Role == 'admin' ? route('companies.update', $company->id) : route('my-company.update', $company->id);
+if (Auth::user()->role == 'admin') {
+$formaction = Auth::user()->role == 'admin' ? route('companies.update', $company->id) : route('my-company.update', $company->id);
 $cancelRoute = route('companies.index');
 }else {
 $formaction = route('my-company.update');
@@ -11,7 +11,7 @@ $cancelRoute = route('my-company.show');
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-2xl text-gray-800 leading-tight">
-            @if(Auth::user()->Role == 'admin')
+            @if(Auth::user()->role == 'admin') 
             Edit Company
             @else
             Edit My Company

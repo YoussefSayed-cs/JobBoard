@@ -21,7 +21,7 @@
                     <!-- Archived Companies -->
                     <a href="{{ route('companies.index', ['archived' => 'true']) }}"
                         class="inline-flex items-center px-5 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition font-semibold">
-                        📦 Archived Companies
+                         Archived Companies
                     </a>
                 @endif
             </div>
@@ -29,7 +29,7 @@
             <!-- Add Company Button -->
             <a href="{{ route('companies.create') }}"
                 class="inline-flex items-center px-5 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition font-semibold">
-                ➕ Add Company
+                 Add Company
             </a>
         </div>
 
@@ -86,7 +86,7 @@
                                             <!-- Edit Button -->
                                             <a href="{{ route('companies.edit', $company->id)}}"
                                                 class="text-blue-600 hover:text-blue-800 font-semibold hover:underline">
-                                                ✏️ Edit
+                                                 Edit
                                             </a>
 
                                             <!-- Archive Button -->
@@ -94,7 +94,7 @@
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="text-orange-600 hover:text-orange-800 font-semibold hover:underline">
-                                                    🗂️ Archive
+                                                     Archive
                                                 </button>
                                             </form>
                                         @endif

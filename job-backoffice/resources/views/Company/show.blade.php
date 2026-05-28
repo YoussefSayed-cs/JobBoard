@@ -9,7 +9,7 @@
         <x-toast-notification />
 
         <!-- Company Card -->
-        <div class="bg-white shadow-lg rounded-lg p-8 mb-8 border-l-4 border-blue-500">
+        <div class="bg-white shadow-lg rounded-lg p-8 mb-8 border-l-4">
             <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-6">
                 <div class="flex-1">
                     <h3 class="text-3xl font-bold mb-4 text-gray-900">{{ $company->name }}</h3>
@@ -17,26 +17,26 @@
                     <div class="space-y-3 mb-6">
                         @if($company->owner)
                         <p class="text-gray-700">
-                            <span class="font-semibold text-gray-900">👤 Owner:</span>
+                            <span class="font-semibold text-gray-900"> Owner:</span>
                             <span class="text-gray-600">{{ $company->owner->name ?? '—' }}</span>
                         </p>
                         @endif
                         <p class="text-gray-700">
-                            <span class="font-semibold text-gray-900">📍 Address:</span>
+                            <span class="font-semibold text-gray-900"> Address:</span>
                             <span class="text-gray-600">{{ $company->address ?? '—' }}</span>
                         </p>
                         <p class="text-gray-700">
-                            <span class="font-semibold text-gray-900">🏭 Industry:</span>
+                            <span class="font-semibold text-gray-900"> Industry:</span>
                             <span class="text-gray-600">{{ $company->industry ?? '—' }}</span>
                         </p>
                         @if($company->description)
                         <p class="text-gray-700">
-                            <span class="font-semibold text-gray-900">📝 Description:</span>
+                            <span class="font-semibold text-gray-900"> Description:</span>
                             <span class="text-gray-600 block mt-1">{{ $company->description }}</span>
                         </p>
                         @endif
                         <p class="text-gray-700">
-                            <span class="font-semibold text-gray-900">🌐 Website:</span>
+                            <span class="font-semibold text-gray-900"> Website:</span>
                             @if($company->website)
                                 <a href="{{ $company->website }}" target="_blank" class="text-blue-600 hover:underline break-all">
                                     {{ $company->website }}
@@ -52,12 +52,12 @@
                     @if (auth()->user()->role == 'company-owner')
                         <a href="{{ route('my-company.edit') }}"
                            class="px-5 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition font-semibold text-center">
-                           ✏️ Edit
+                            Edit
                         </a>
                     @else
                         <a href="{{ route('companies.edit', ['company' => $company->id, 'redirectToList' => 'false']) }}"
                            class="px-5 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition font-semibold text-center">
-                           ✏️ Edit
+                            Edit
                         </a>
                     @endif
 
@@ -66,7 +66,7 @@
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="w-full px-5 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition font-semibold">
-                                🗂️ Archive
+                                 Archive
                             </button>
                         </form>
 
@@ -86,13 +86,13 @@
                 <li>
                     <a href="{{ route('companies.show', ['company' => $company->id, 'tab' => 'jobs']) }}"
                        class="inline-block py-3 px-4 font-semibold border-b-2 transition {{ (request('tab') == 'jobs' || request('tab') == '') ? 'text-blue-600 border-blue-600' : 'text-gray-600 border-transparent hover:text-gray-900' }}">
-                        💼 Jobs ({{ $jobs->total() }})
+                         Jobs ({{ $jobs->total() }})
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('companies.show', ['company' => $company->id, 'tab' => 'applications']) }}"
                        class="inline-block py-3 px-4 font-semibold border-b-2 transition {{ request('tab') == 'applications' ? 'text-blue-600 border-blue-600' : 'text-gray-600 border-transparent hover:text-gray-900' }}">
-                        📋 Applications ({{ $applications->total() }})
+                         Applications ({{ $applications->total() }})
                     </a>
                 </li>
             </ul>
@@ -128,10 +128,10 @@
                                         <td class="px-6 py-4 text-sm">
                                             <div class="flex gap-3">
                                                 <a href="{{ route('job-vacancies.show', $job->id) }}" class="text-blue-600 hover:text-blue-800 font-semibold hover:underline">
-                                                    👁️ View
+                                                     View
                                                 </a>
                                                 <a href="{{ route('job-vacancies.edit', $job->id) }}" class="text-green-600 hover:text-green-800 font-semibold hover:underline">
-                                                    ✏️ Edit
+                                                     Edit
                                                 </a>
                                             </div>
                                         </td>
@@ -174,18 +174,18 @@
                                         <td class="px-6 py-4 text-sm text-gray-700">{{ $app->JobVacancy->title ?? '—' }}</td>
                                         <td class="px-6 py-4 text-sm">
                                             @if($app->status == 'pending')
-                                                <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-semibold">⏳ Pending</span>
+                                                <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-semibold"> Pending</span>
                                             @elseif($app->status == 'accepted')
-                                                <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-semibold">✅ Accepted</span>
+                                                <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-semibold"> Accepted</span>
                                             @elseif($app->status == 'rejected')
-                                                <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-xs font-semibold">❌ Rejected</span>
+                                                <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-xs font-semibold"> Rejected</span>
                                             @else
                                                 <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-xs font-semibold">{{ $app->status }}</span>
                                             @endif
                                         </td>
                                         <td class="px-6 py-4 text-sm">
                                             <a href="{{ route('job-applications.show', $app->id) }}" class="text-blue-600 hover:text-blue-800 font-semibold hover:underline">
-                                                👁️ View
+                                                 View
                                             </a>
                                         </td>
                                     </tr>

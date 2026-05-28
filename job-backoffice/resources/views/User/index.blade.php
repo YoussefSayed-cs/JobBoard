@@ -21,7 +21,7 @@
                     <!-- Archived Users -->
                     <a href="{{ route('users.index', ['archived' => 'true']) }}"
                         class="inline-flex items-center px-5 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition font-semibold">
-                        📦 Archived Users
+                         Archived Users
                     </a>
                 @endif
             </div>
@@ -40,14 +40,14 @@
                     @endif
 
                     <button type="submit" class="px-6 py-2 bg-blue-500 text-white rounded-r-lg hover:bg-blue-600 transition font-semibold">
-                        🔍 Search
+                         Search
                     </button>
                 </div>
 
                 @if(request('search'))
                     <a href="{{ route('users.index', ['filter' => request('filter')]) }}"
                         class="px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition font-semibold">
-                        ✕ Clear
+                         Clear
                     </a>
                 @endif
             </form>
@@ -78,15 +78,15 @@
                                 <td class="px-6 py-4 text-sm">
                                     @if($user->role == 'admin')
                                         <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-xs font-semibold">
-                                            👑 Admin
+                                             Admin
                                         </span>
                                     @elseif($user->role == 'company-owner')
                                         <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-xs font-semibold">
-                                            🏢 Company Owner
+                                             Company Owner
                                         </span>
                                     @else
                                         <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-semibold">
-                                            👤 User
+                                             User
                                         </span>
                                     @endif
                                 </td>
@@ -98,7 +98,7 @@
                                                 @csrf
                                                 @method('PUT')
                                                 <button type="submit" class="text-green-600 hover:text-green-800 font-semibold hover:underline">
-                                                    ✓ Restore
+                                                     Restore
                                                 </button>
                                             </form>
                                         @else
@@ -106,7 +106,7 @@
                                                 <!-- Edit Button -->
                                                 <a href="{{ route('users.edit', $user->id)}}"
                                                     class="text-blue-600 hover:text-blue-800 font-semibold hover:underline">
-                                                    ✏️ Edit
+                                                     Edit
                                                 </a>
 
                                                 <!-- Archive Button -->
@@ -114,7 +114,7 @@
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="text-orange-600 hover:text-orange-800 font-semibold hover:underline">
-                                                        🗂️ Archive
+                                                         Archive
                                                     </button>
                                                 </form>
                                             @else
