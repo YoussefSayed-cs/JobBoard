@@ -226,7 +226,8 @@
         };
 
         const convLabels = @json($analytics['conversionRates']->pluck('title'));
-        const convData   = @json($analytics['conversionRates']->pluck('conversionRates'));
+
+        const convData =  @json($analytics['conversionRates']->pluck('conversionRate'));
 
         // ---- Shared tooltip config ----
         const tooltipDefaults = {

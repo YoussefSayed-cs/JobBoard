@@ -17,9 +17,7 @@ class ResumesAnalysisServices
         }
     }
 
-    /**
-     * الخطوة الأولى: استخراج البيانات من الـ CV
-     */
+
     public function extractResumeInformation(string $fileUri): array
     {
         try {
@@ -96,9 +94,7 @@ class ResumesAnalysisServices
         }
     }
 
-    /**
-     * الخطوة الثانية: تحليل الـ CV مقابل الوظيفة
-     */
+    
     public function analyzeResume($job_vacancy, array $resumeData): array
     {
         try {
