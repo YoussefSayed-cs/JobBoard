@@ -7,9 +7,9 @@ use App\Models\job_application;
 use App\Models\job_vacancy;
 use App\Models\resume;
 use App\Services\ResumesAnalysisServices;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-
 
 class JobVacancyController extends Controller
 {
@@ -39,7 +39,6 @@ class JobVacancyController extends Controller
         $job_vacancy = job_vacancy::findOrFail($id);
         $resumeID = null;
 
-        // ✅ تحديث الهيكل الافتراضي ليتناسب مع رد Gemini (Arrays)
         $extracted = [
             'summary' => '',
             'skills' => [],
@@ -84,7 +83,7 @@ class JobVacancyController extends Controller
             $fileName = 'resume_' . time() . '.pdf';
             $path = $file->storeAs('resume', $fileName, 'cloud');
 
-            
+
             try {
                 $extracted = $this->resumeService->extractResumeInformation($path);
             } catch (\Throwable $e) {
@@ -148,4 +147,5 @@ class JobVacancyController extends Controller
             ->with('success', 'Your application has been submitted successfully!');
 
     }
+
 }

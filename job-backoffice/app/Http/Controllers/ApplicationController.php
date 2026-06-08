@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\job_application;
+use App\Events\JobApplicationSubmitted;
 use App\Notifications\newJobApply;
 use App\Http\Requests\JobApplication\JobApplicationUpdateRequest;
 use Illuminate\Http\Request;
@@ -83,17 +84,34 @@ class ApplicationController extends Controller
         }
 
         // Generate a temporary URL (valid 15 minutes) from cloud storage
+        $disk = Storage::disk('cloud');
+        $fallbackError = null;
+
         try {
-            $url = Storage::disk('cloud')->temporaryUrl($fileUri, now()->addMinutes(15));
-            return redirect()->away($url);
-        } catch (\Throwable $e) {
-            // Fallback: try direct URL construction
-            $baseUrl = rtrim(config('filesystems.disks.s3.url', ''), '/');
-            if ($baseUrl) {
-                return redirect()->away($baseUrl . '/' . ltrim($fileUri, '/'));
+            if (method_exists($disk, 'temporaryUrl')) {
+                $url = $disk->temporaryUrl($fileUri, now()->addMinutes(15));
+                return redirect()->away($url);
             }
-            abort(500, 'Could not generate resume URL: ' . $e->getMessage());
+
+            if (method_exists($disk, 'url')) {
+                $url = $disk->url($fileUri);
+                return redirect()->away($url);
+            }
+        } catch (\Throwable $e) {
+            $fallbackError = $e;
         }
+
+        // Fallback: try direct URL construction
+        $baseUrl = rtrim(config('filesystems.disks.cloud.url', ''), '/');
+        if (!$baseUrl) {
+            $baseUrl = rtrim(config('filesystems.disks.s3.url', ''), '');
+        }
+
+        if ($baseUrl) {
+            return redirect()->away($baseUrl . '/' . ltrim($fileUri, '/'));
+        }
+
+        abort(500, isset($fallbackError) ? 'Could not generate resume URL: ' . $fallbackError->getMessage() : 'Could not generate resume URL.');
     }
 
     /**
@@ -118,28 +136,20 @@ class ApplicationController extends Controller
         return redirect()->route('job-applications.index')->with('success', 'Job application updated successfully.');
     }
 
-    public function store(Request $request)
-    {
-        $jobApplication = job_application::create([
-            'jobVacancyID' => $request->jobVacancyID,
-            'userID'       => Auth::id(),
-            'status'       => 'pending',
-        ]);
-
-        // Define the user variable
-        $user = Auth::user();
 
 
-        // Company owner
-        $owner = $jobApplication->jobVacancy->company->Owner;
+public function store(Request $request)
+{
+    $jobApplication = job_application::create([
+        'jobVacancyID' => $request->jobVacancyID,
+        'userID'       => Auth::id(),
+        'status'       => 'pending',
+    ]);
 
-        //  send Notification to company owner
-        $owner->notify(
-            new newJobApply($jobApplication, route('job-applications.show', $jobApplication->id), $user, 'Application submitted successfully')
-        );
+    JobApplicationSubmitted::dispatch(Auth::user(), $jobApplication); 
 
-        return back()->with('success', 'Application sent successfully');
-    }
+    return back()->with('success', 'Application sent successfully');
+}
 
     /**
      * Remove the specified resource from storage.

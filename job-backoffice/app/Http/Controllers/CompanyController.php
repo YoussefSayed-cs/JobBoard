@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\company;
 use App\Http\Requests\Company\CompanyCreateRequest;
 use App\Http\Requests\Company\CompanyupdateRequest;
-use Illuminate\Support\Facades\Auth;  // Ensure imported if used elsewhere
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller

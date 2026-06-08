@@ -61,23 +61,44 @@
                             };
                         @endphp
                         
+                        @php
+                            $score    = $jobApplication->aiGeneratedScore;
+                            $feedback = $jobApplication->aiGeneratedFeedback ?? '';
+                            $errorPhrases = ['Service error.', 'Analysis failed.', 'AI evaluation is temporarily unavailable.', 'No AI feedback'];
+                            $isError  = $score == 0 && in_array(trim($feedback), $errorPhrases);
+
+                            $scoreColor = match(true) {
+                                !$isError && $score >= 70 => 'bg-green-500/10 border-green-500/30 text-green-300',
+                                !$isError && $score >= 40 => 'bg-yellow-500/10 border-yellow-500/30 text-yellow-300',
+                                !$isError && $score > 0   => 'bg-red-500/10 border-red-500/30 text-red-300',
+                                default                   => 'bg-white/5 border-white/10 text-white/30',
+                            };
+                        @endphp
+
                         <div class="flex items-center gap-3">
                             <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border {{ $statusColors }}">
                                 {{ $jobApplication->status }}
                             </span>
-                            
+
                             {{-- AI Score Badge --}}
-                            <div class="flex items-center gap-1 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-300 text-xs font-bold" title="AI Match Score">
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                                {{ $jobApplication->aiGeneratedScore }}% Match
-                            </div>
+                            @if($isError)
+                                <div class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/30 text-xs font-medium" title="AI analysis unavailable">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    Pending analysis
+                                </div>
+                            @else
+                                <div class="flex items-center gap-1 px-3 py-1 rounded-full border text-xs font-bold {{ $scoreColor }}" title="AI Match Score">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                    {{ $score }}% Match
+                                </div>
+                            @endif
                         </div>
 
                         {{-- AI Feedback --}}
-                        @if($jobApplication->aiGeneratedFeedback)
+                        @if(!$isError && $feedback)
                         <div class="mt-2 p-3 rounded-xl bg-white/5 border border-white/10 w-full text-right group/feedback relative">
                             <p class="text-xs text-white/50 italic line-clamp-2 group-hover/feedback:line-clamp-none transition-all">
-                                "{{ $jobApplication->aiGeneratedFeedback }}"
+                                "{{ $feedback }}"
                             </p>
                         </div>
                         @endif

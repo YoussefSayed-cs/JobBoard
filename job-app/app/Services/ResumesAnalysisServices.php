@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Http;
 
 class ResumesAnalysisServices
 {
-    protected string $baseUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent';
+    protected string $baseUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
 
     public function __construct()
     {
@@ -94,7 +94,7 @@ class ResumesAnalysisServices
         }
     }
 
-    
+
     public function analyzeResume($job_vacancy, array $resumeData): array
     {
         try {
