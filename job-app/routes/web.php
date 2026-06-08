@@ -6,7 +6,6 @@ use App\Http\Controllers\JobVacancyController;
 use App\Http\Controllers\ProfileController;
 use App\Models\company;
 use Illuminate\Support\Facades\Route;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
     $companies = company::latest()->take(6)->get();
